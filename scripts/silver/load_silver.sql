@@ -1,3 +1,6 @@
+-- Purpose: Load data from bronze layer to silver layer with transformations and cleaning
+-- This script truncates and populates the silver layer tables with cleaned and transformed data from the bronze layer
+
 TRUNCATE TABLE silver.crm_cus_info
 INSERT INTO silver.crm_cus_info (
 	cst_id,

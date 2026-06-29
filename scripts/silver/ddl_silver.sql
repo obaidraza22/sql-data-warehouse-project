@@ -1,3 +1,5 @@
+-- The SQL script provided is designed to manage and transform data from a "bronze" layer to a "silver" layer in a data warehouse architecture. The purpose of this script is to clean, transform, and load data into the silver layer tables, which are typically more refined and structured than the raw data found in the bronze layer.
+
 DROP TABLE IF EXISTS silver.crm_cus_info;
 
 CREATE TABLE silver.crm_cus_info (
