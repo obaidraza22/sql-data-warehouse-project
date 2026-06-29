@@ -50,17 +50,17 @@ CREATE TABLE silver.erp_cust_az12 (
 	dwh_create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-DROP TABLE IF EXISTS silver.loc_a101;
+DROP TABLE IF EXISTS silver.erp_loc_a101;
 
-CREATE TABLE silver.loc_a101 (
+CREATE TABLE silver.erp_loc_a101 (
 	cid varchar(50),
 	cntry varchar(50),
 	dwh_create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-DROP TABLE IF EXISTS silver.px_cat_g1v2;
+DROP TABLE IF EXISTS silver.erp_px_cat_g1v2;
 
-CREATE TABLE silver.px_cat_g1v2 (
+CREATE TABLE silver.erp_px_cat_g1v2 (
     id varchar(50),
     cat varchar(50),
     subcat varchar(50),

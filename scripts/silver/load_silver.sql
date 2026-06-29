@@ -103,3 +103,54 @@ INSERT INTO silver.crm_sales_details (
 			ELSE csd.sls_price 
 		END
 	FROM bronze.crm_sales_details csd 
+
+TRUNCATE TABLE silver.erp_cust_az12
+INSERT INTO silver.erp_cust_az12 (
+	cid,
+	bdate,
+	gen
+)
+	SELECT
+		CASE
+			WHEN eca.cid LIKE 'NAS%' THEN SUBSTRING(eca.cid, 4, LENGTH(eca.cid))
+			ELSE eca.cid
+		END cid,
+		CASE
+			WHEN eca.bdate > '2010-01-01' THEN NULL
+			ELSE eca.bdate
+		END bdate,
+		CASE 
+			WHEN eca.gen = 'Male' OR eca.gen = 'M' THEN 'Male'
+			WHEN eca.gen = 'Female' OR eca.gen = 'F' THEN 'Female'
+			ELSE NULL
+		END gen
+	FROM bronze.erp_cust_az12 eca  
+
+TRUNCATE TABLE silver.erp_loc_a101
+INSERT INTO silver.erp_loc_a101 (
+	cid,
+	cntry
+)
+	SELECT
+		REPLACE(ela.cid, '-', ''),
+		CASE
+			WHEN TRIM(ela.cntry) = 'DE' THEN 'Germany'
+			WHEN TRIM(ela.cntry) IN ('US', 'USA') THEN 'United States'
+			WHEN TRIM(ela.cntry) = '' OR ela.cntry IS NULL THEN 'n/a'
+			ELSE ela.cntry
+		END entry
+	FROM bronze.erp_loc_a101 ela 
+
+TRUNCATE TABLE silver.erp_px_cat_g1v2
+INSERT INTO silver.erp_px_cat_g1v2 (
+	id,
+	cat,
+	subcat,
+	maintenance
+)
+	SELECT
+		epcgv.id,
+		epcgv.cat,
+		epcgv.subcat,
+		epcgv.maintenance 
+	FROM bronze.erp_px_cat_g1v2 epcgv 
